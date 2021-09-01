@@ -1,0 +1,22 @@
+body {
+    background-color: lavender;
+}
+
+div.card {
+    border: 5px solid white;
+    border-radius: 10px;
+    margin: 10px;
+    background-color: chocolate;
+    width: 200px;
+    height: 350px;
+    font-size: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div#hand {
+    border: 2px solid white;
+    display: flex;
+    flex-flow: row wrap;
+}
