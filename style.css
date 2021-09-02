@@ -1,12 +1,12 @@
 body {
-    background-color: lavender;
+    background-color: lightcoral;
 }
 
 div.card {
     border: 5px solid white;
     border-radius: 10px;
     margin: 10px;
-    background-color: chocolate;
+    background-color: olivedrab;
     width: 200px;
     height: 350px;
     font-size: 10vw;

@@ -1,26 +1,75 @@
 const $hand = document.getElementById("hand")
 const $firstCard = $hand.children[0]
+const $pile = document.getElementById("pile")
 
 const colors = ["red", "blue", "green", "yellow"]
-
 const cards = []
+const players = []
+players[0] = {}
+players[0].hand = []
+players[1] = {}
+players[1].hand = []
+players[2] = {}
+players[2].hand = []
+players[3] = {}
+players[3].hand = []
 
-for (let i = 0; i < 10; i++) {
-    for (let j = 0; j < 4; j++) {
-        let newCard = {
-            value: i,
-            color: colors[j]
+let turn = 0
+let clockwise = true
+const pile = []
+
+spawnCards()
+players.forEach(player => dealCards(player))
+placeFirstPileCard()
+
+function takeTurn() {
+    showPileTop()
+}
+
+$hand.onclick = takeTurn
+
+function showPileTop(top) {
+    const $newCard = document.createElement("div")
+    $newCard.classList.add("card")
+    $newCard.innerHTML = top.value
+    $newCard.style.backgroundColor = top.color
+    $pile.innerHTML = ""
+    $pile.append($newCard)
+}
+
+function spawnCards() {
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 4; j++) {
+            let newCard = {
+                value: i,
+                color: colors[j]
+            }
+            cards.push(newCard)
         }
-        cards.push(newCard)
     }
 }
 
-console.log(cards)
+function dealCards(player) {
+    for(let i = 0; i < 8; i++) {
+        const whichCard = Math.floor(Math.random()*cards.length)
+        const pickedCard = cards.splice(whichCard,1)[0]
+        player.hand.push(pickedCard)
+        console.log(cards)
+        if (players.indexOf(player) == 0)
+            placeInHand(pickedCard)
+    }
+}
 
-for(let i = 0; i < cards.length; i++) {
+function placeFirstPileCard() {
+    const whichCard = Math.floor(Math.random()*cards.length)
+    const pickedCard = cards.splice(whichCard,1)[0]
+    pile.push(pickedCard)
+}
+
+function placeInHand(pickedCard) {
     const $newCard = document.createElement("div")
     $newCard.classList.add("card")
-    $newCard.innerHTML = cards[i].value
-    $newCard.style.backgroundColor = cards[i].color
+    $newCard.innerHTML = pickedCard.value
+    $newCard.style.backgroundColor = pickedCard.color
     $hand.append($newCard)
 }
